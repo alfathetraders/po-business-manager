@@ -77,6 +77,13 @@ body.innerHTML+=`<tr>
 <td>${p.amount}</td>
 <td>${p.investment}</td>
 <td>${p.profit.toFixed(2)}</td>
+
+<td>
+<button onclick="openSTInvoice(${i})">Sales Tax Invoice</button>
+<button onclick="openBill(${i})">Bill</button>
+<button onclick="openDC(${i})">Delivery Challan</button>
+</td>
+
 </tr>`
 
 })
