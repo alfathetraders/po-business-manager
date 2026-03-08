@@ -100,3 +100,33 @@ a.click()
 }
 
 loadData()
+function drawProfitChart(){
+
+let pos = JSON.parse(localStorage.getItem("pos") || "[]")
+
+let labels = []
+let profits = []
+
+pos.forEach((p,i)=>{
+labels.push("PO "+(i+1))
+profits.push(Number(p.profit || 0))
+})
+
+const ctx = document.getElementById("profitChart")
+
+if(!ctx) return
+
+new Chart(ctx,{
+type:'bar',
+data:{
+labels:labels,
+datasets:[{
+label:'Profit',
+data:profits
+}]
+}
+})
+
+}
+
+drawProfitChart()
