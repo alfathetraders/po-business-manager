@@ -133,7 +133,35 @@ data:profits
 }]
 }
 })
+function openSTInvoice(i){
 
+let pos = JSON.parse(localStorage.getItem("poData") || "[]")
+
+localStorage.setItem("selectedPO",JSON.stringify(pos[i]))
+
+window.open("stinvoice.html")
+
+}
+
+function openBill(i){
+
+let pos = JSON.parse(localStorage.getItem("poData") || "[]")
+
+localStorage.setItem("selectedPO",JSON.stringify(pos[i]))
+
+window.open("bill.html")
+
+}
+
+function openDC(i){
+
+let pos = JSON.parse(localStorage.getItem("poData") || "[]")
+
+localStorage.setItem("selectedPO",JSON.stringify(pos[i]))
+
+window.open("delivery.html")
+
+}
 }
 
 drawProfitChart()
