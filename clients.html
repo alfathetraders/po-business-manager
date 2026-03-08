@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Client Manager</title>
+<style>
+body{font-family:Arial;padding:20px}
+input{padding:8px;margin:5px}
+button{padding:8px}
+</style>
+</head>
+
+<body>
+
+<h2>Client Manager</h2>
+
+<input id="name" placeholder="Client Name">
+<input id="phone" placeholder="Phone">
+<input id="email" placeholder="Email">
+
+<button onclick="saveClient()">Save</button>
+
+<h3>Client List</h3>
+<ul id="list"></ul>
+
+<script>
+
+function saveClient(){
+
+let name=document.getElementById("name").value
+let phone=document.getElementById("phone").value
+let email=document.getElementById("email").value
+
+let clients=JSON.parse(localStorage.getItem("clients")||"[]")
+
+clients.push({name,phone,email})
+
+localStorage.setItem("clients",JSON.stringify(clients))
+
+load()
+
+}
+
+function load(){
+
+let clients=JSON.parse(localStorage.getItem("clients")||"[]")
+
+let html=""
+
+clients.forEach(c=>{
+html+=<li>${c.name} | ${c.phone} | ${c.email}</li>
+})
+
+document.getElementById("list").innerHTML=html
+
+}
+
+load()
+
+</script>
+
+</body>
+</html>
