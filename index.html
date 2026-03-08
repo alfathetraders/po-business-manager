@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PO Business Manager Enterprise</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="sidebar">
+<h2>PO Manager</h2>
+<ul>
+<li onclick="showPage('dashboard')">Dashboard</li>
+<li onclick="showPage('addpo')">Add PO</li>
+<li onclick="showPage('records')">Records</li>
+<li onclick="showPage('reports')">Reports</li>
+</ul>
+</div>
+
+<div class="main">
+
+<div class="header">
+<h1>PO Business Manager Enterprise</h1>
+</div>
+
+<div id="dashboard" class="page">
+<h2>Dashboard</h2>
+<div class="cards">
+<div class="card blue">
+<p>Total POs</p>
+<h3 id="totalPO">0</h3>
+</div>
+<div class="card green">
+<p>Total Profit</p>
+<h3 id="totalProfit">0</h3>
+</div>
+</div>
+</div>
+
+<div id="addpo" class="page hidden">
+<h2>Add PO</h2>
+
+<input id="poNumber" placeholder="PO Number"><br>
+<input id="client" placeholder="Client Name"><br>
+<input id="amount" placeholder="PO Amount"><br>
+<input id="investment" placeholder="Investment"><br>
+
+<button onclick="calculate()">Calculate Profit</button>
+
+<p id="result"></p>
+
+<button onclick="savePO()">Save PO</button>
+
+</div>
+
+<div id="records" class="page hidden">
+<h2>PO Records</h2>
+
+<table>
+<thead>
+<tr>
+<th>PO</th>
+<th>Client</th>
+<th>Amount</th>
+<th>Investment</th>
+<th>Profit</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+
+</table>
+
+</div>
+
+<div id="reports" class="page hidden">
+<h2>Reports</h2>
+<p>Profit and business summary available in dashboard.</p>
+<button onclick="downloadBackup()">Download Backup</button>
+</div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
