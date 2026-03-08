@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Invoice</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:40px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+margin-bottom:40px;
+}
+
+h1{
+margin:0;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:left;
+}
+
+button{
+padding:10px 20px;
+margin-top:20px;
+background:#2563eb;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<div>
+<h1>ALFATHE TRADERS</h1>
+<p>Business Invoice</p>
+</div>
+
+<div>
+<p>Date: <span id="date"></span></p>
+</div>
+
+</div>
+
+<table>
+
+<tr>
+<th>PO Number</th>
+<td id="po"></td>
+</tr>
+
+<tr>
+<th>Client</th>
+<td id="client"></td>
+</tr>
+
+<tr>
+<th>Amount</th>
+<td id="amount"></td>
+</tr>
+
+<tr>
+<th>Investment</th>
+<td id="investment"></td>
+</tr>
+
+<tr>
+<th>Profit</th>
+<td id="profit"></td>
+</tr>
+
+</table>
+
+<button onclick="window.print()">Print Invoice</button>
+
+<script>
+
+document.getElementById("date").innerText =
+new Date().toLocaleDateString()
+
+let data = JSON.parse(localStorage.getItem("poData") || "[]")
+
+let last = data[data.length-1]
+
+if(last){
+
+document.getElementById("po").innerText = last.number
+document.getElementById("client").innerText = last.client
+document.getElementById("amount").innerText = last.amount
+document.getElementById("investment").innerText = last.investment
+document.getElementById("profit").innerText = last.profit
+
+}
+
+</script>
+
+</body>
+</html>
