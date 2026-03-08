@@ -102,7 +102,7 @@ a.click()
 loadData()
 function drawProfitChart(){
 
-let pos = JSON.parse(localStorage.getItem("pos") || "[]")
+let pos = JSON.parse(localStorage.getItem("poData") || "[]")
 
 let labels = []
 let profits = []
