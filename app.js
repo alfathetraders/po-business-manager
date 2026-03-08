@@ -71,19 +71,18 @@ data.forEach(p=>{
 
 totalProfit+=p.profit
 
-body.innerHTML+=`<tr>
+bbody.innerHTML += `
+<tr>
 <td>${p.number}</td>
 <td>${p.client}</td>
 <td>${p.amount}</td>
 <td>${p.investment}</td>
 <td>${p.profit.toFixed(2)}</td>
-
 <td>
 <button onclick="openSTInvoice(${i})">Sales Tax Invoice</button>
 <button onclick="openBill(${i})">Bill</button>
 <button onclick="openDC(${i})">Delivery Challan</button>
 </td>
-
 </tr>`
 
 })
