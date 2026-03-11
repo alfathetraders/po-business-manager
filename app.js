@@ -11,8 +11,12 @@ p.classList.add("hidden")
 
 document.getElementById(page).classList.remove("hidden")
 
-if(page==="records"){
+if(page=="records"){
+
+polist = JSON.parse(localStorage.getItem("poList")) || []
+
 loadRecords()
+
 }
 
 if(page==="dashboard"){
