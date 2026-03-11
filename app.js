@@ -1,170 +1,104 @@
-function showPage(id){
+let poList = JSON.parse(localStorage.getItem("poList") || "[]")
 
-document.querySelectorAll(".page").forEach(function(p){
+function showPage(page){
+
+document.querySelectorAll(".page").forEach(p=>{
 p.classList.add("hidden")
 })
 
-document.getElementById(id).classList.remove("hidden")
-
-loadData()
+document.getElementById(page).classList.remove("hidden")
 
 }
 
 function calculate(){
 
-let amount=parseFloat(document.getElementById("amount").value||0)
+let amount = parseFloat(document.getElementById("amount").value) || 0
+let investment = parseFloat(document.getElementById("investment").value) || 0
 
-let invest=parseFloat(document.getElementById("investment").value||0)
+let profit = amount - investment
 
-let gst=amount*18/118
-
-let ag=gst*0.20
-
-let rem=gst-ag
-
-let lawyer=rem*0.23
-
-let tax=amount*0.055
-
-let check=amount-ag-tax
-
-let profit=(check-invest)-lawyer
-
-document.getElementById("result").innerText="Estimated Profit: "+profit.toFixed(2)
+document.getElementById("result").innerText="Profit: "+profit.toFixed(2)
 
 }
 
 function savePO(){
 
-let poNumber=document.getElementById("poNumber")
+let number=document.getElementById("poNumber").value
+let client=document.getElementById("client").value
+let amount=parseFloat(document.getElementById("amount").value) || 0
+let investment=parseFloat(document.getElementById("investment").value) || 0
 
-let client=document.getElementById("client")
-
-let department=document.getElementById("department")
-
-let amount=parseFloat(document.getElementById("amount").value||0)
-
-let invest=parseFloat(document.getElementById("investment").value||0)
-
-
-let gst=amount*18/118
-
-let ag=gst*0.20
-
-let rem=gst-ag
-
-let lawyer=rem*0.23
-
-let tax=amount*0.055
-
-let check=amount-ag-tax
-
-let profit=(check-invest)-lawyer
-
+let profit=amount-investment
 
 let po={
-
-number:poNumber.value,
-
-client:client.value,
-
-department:department.value,
-
+number:number,
+client:client,
 amount:amount,
-
-investment:invest,
-
+investment:investment,
 profit:profit
-
 }
 
+poList.push(po)
 
-let data=JSON.parse(localStorage.getItem("poData")||"[]")
+localStorage.setItem("poList",JSON.stringify(poList))
 
-data.push(po)
-
-localStorage.setItem("poData",JSON.stringify(data))
+loadTable()
 
 alert("PO Saved")
 
-loadData()
-
-}
 }
 
-function loadData(){
+function loadTable(){
 
-let data=JSON.parse(localStorage.getItem("poData")||"[]")
+let table=document.getElementById("tableBody")
 
-let body=document.getElementById("tableBody")
+if(!table) return
 
-if(!body) return
+table.innerHTML=""
 
-body.innerHTML=""
+poList.forEach((po,index)=>{
 
-let totalProfit=0
-
-data.forEach(function(p,i){
-
-totalProfit+=p.profit
-
-body.innerHTML+=`
+table.innerHTML+=`
 <tr>
-<td>${p.number}</td>
-<td>${p.client}</td>
-<td>${p.amount}</td>
-<td>${p.investment}</td>
-<td>${p.profit.toFixed(2)}</td>
-
+<td>${po.number}</td>
+<td>${po.client}</td>
+<td>${po.amount}</td>
+<td>${po.investment}</td>
+<td>${po.profit}</td>
 <td>
-
-<button onclick="openST(${i})">Sales Tax Invoice</button>
-
-<button onclick="openBill(${i})">Bill</button>
-
-<button onclick="openDC(${i})">Delivery Challan</button>
-
+<button onclick="openBill(${index})">Bill</button>
+<button onclick="openInvoice(${index})">Sales Tax Invoice</button>
+<button onclick="openDC(${index})">Delivery Challan</button>
 </td>
-
 </tr>
 `
 
 })
 
-let profitBox=document.getElementById("totalProfit")
-
-if(profitBox){
-profitBox.innerText=totalProfit.toFixed(2)
-}
-
-}
-
-function openST(i){
-
-let pos=JSON.parse(localStorage.getItem("poData")||"[]")
-
-localStorage.setItem("selectedPO",JSON.stringify(pos[i]))
-
-window.open("stinvoice.html")
-
 }
 
 function openBill(i){
 
-let pos=JSON.parse(localStorage.getItem("poData")||"[]")
-
-localStorage.setItem("selectedPO",JSON.stringify(pos[i]))
+localStorage.setItem("selectedPO",JSON.stringify(poList[i]))
 
 window.open("bill.html")
 
 }
 
+function openInvoice(i){
+
+localStorage.setItem("selectedPO",JSON.stringify(poList[i]))
+
+window.open("stinvoice.html")
+
+}
+
 function openDC(i){
 
-let pos=JSON.parse(localStorage.getItem("poData")||"[]")
-
-localStorage.setItem("selectedPO",JSON.stringify(pos[i]))
+localStorage.setItem("selectedPO",JSON.stringify(poList[i]))
 
 window.open("dc.html")
 
 }
+
+loadTable()
