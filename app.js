@@ -156,3 +156,15 @@ loadRecords()
 showPage("dashboard")
 
 })
+function deletePO(index){
+
+let poList = JSON.parse(localStorage.getItem("poList")) || []
+
+poList.splice(index,1)
+
+localStorage.setItem("poList", JSON.stringify(poList))
+
+loadRecords()
+loadDashboard()
+
+}
