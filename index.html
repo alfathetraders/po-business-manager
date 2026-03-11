@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>PO Business Manager Enterprise</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
+
 <body>
+
 
 <div class="sidebar">
 
@@ -27,11 +33,12 @@
 
 </div>
 
+
+
 <div class="content">
 
 <h1>PO Business Manager Enterprise</h1>
 
-<!-- DASHBOARD -->
 
 <div id="dashboard" class="page">
 
@@ -45,15 +52,13 @@
 
 
 
-<!-- ADD PO -->
-
 <div id="addpo" class="page hidden">
 
 <h2>Add PO</h2>
 
 <input id="poNumber" placeholder="PO Number"><br><br>
 
-<input id="client" placeholder="Client Name"><br><br>
+<input id="client" placeholder="Client"><br><br>
 
 <input id="department" placeholder="Department"><br><br>
 
@@ -74,18 +79,28 @@
 <table>
 
 <tr>
+
 <th>Item</th>
+
 <th>Specification</th>
+
 <th>Unit</th>
+
 <th>Pack</th>
+
 <th>Qty</th>
+
 <th>Rate</th>
+
 <th></th>
+
 </tr>
 
 <tbody id="itemsTable"></tbody>
 
 </table>
+
+
 
 <input id="itemName" placeholder="Item">
 
@@ -101,32 +116,39 @@
 
 <button onclick="addItem()">Add Item</button>
 
+
 <br><br>
 
 <button onclick="savePO()">Save PO</button>
+
 
 </div>
 
 
 
-<!-- RECORDS -->
 
 <div id="records" class="page hidden">
 
 <h2>PO Records</h2>
+
 
 <table>
 
 <tr>
 
 <th>PO</th>
+
 <th>Client</th>
+
 <th>PO Amount</th>
+
 <th>Check Amount</th>
+
 <th>Investment</th>
-<th>Extra Expense</th>
+
+<th>Extra</th>
+
 <th>Profit</th>
-<th>Documents</th>
 
 </tr>
 
@@ -134,11 +156,15 @@
 
 </table>
 
-</div>
 
 </div>
+
+
+</div>
+
 
 <script src="app.js"></script>
 
 </body>
+
 </html>
