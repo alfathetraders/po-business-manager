@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>Bill</title>
 
 <style>
 
 body{
-font-family: Arial;
+font-family:Arial;
 margin:120px 60px;
 }
 
@@ -48,15 +47,12 @@ font-weight:bold;
 }
 
 @media print{
-
 button{
 display:none;
 }
-
 }
 
 </style>
-
 </head>
 
 <body>
@@ -64,11 +60,11 @@ display:none;
 <div class="top">
 
 <div>
-REF: <span id="ref"></span>
+REF : <span id="ref"></span>
 </div>
 
 <div>
-DATE: <span id="date"></span>
+DATE : <span id="date"></span>
 </div>
 
 </div>
@@ -86,51 +82,31 @@ BILL
 <table>
 
 <tr>
-
 <th>SR NO</th>
-
 <th>ITEMS DESCRIPTIONS</th>
-
 <th>SPECIFICATIONS</th>
-
 <th>UNIT OF MEASURE</th>
-
 <th>PACK SIZE</th>
-
 <th>QTY</th>
-
 <th>RATE</th>
-
 <th>AMOUNT</th>
-
 </tr>
 
-<tbody id="items">
-
-</tbody>
+<tbody id="items"></tbody>
 
 <tr class="total">
-
 <td colspan="7">TOTAL AMOUNT</td>
-
 <td id="total"></td>
-
 </tr>
 
 <tr class="total">
-
 <td colspan="7">GST 18%</td>
-
 <td id="gst"></td>
-
 </tr>
 
 <tr class="total">
-
 <td colspan="7">GRAND TOTAL</td>
-
 <td id="grand"></td>
-
 </tr>
 
 </table>
@@ -143,13 +119,15 @@ BILL
 
 let po=JSON.parse(localStorage.getItem("selectedPO")||"{}")
 
-document.getElementById("ref").innerText=po.number
+document.getElementById("ref").innerText=po.number || ""
 
 document.getElementById("date").innerText=new Date().toLocaleDateString()
 
+document.getElementById("dept").innerText=po.department || ""
+
 let items=document.getElementById("items")
 
-let total=po.amount||0
+let total=po.amount || 0
 
 items.innerHTML+=`
 <tr>
