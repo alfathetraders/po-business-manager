@@ -119,7 +119,10 @@ table.innerHTML += `
 <td>${po.investment}</td>
 <td>${po.extra}</td>
 <td>${(po.profit || 0).toFixed(2)}</td>
-<td><button onclick="deletePO(${index})">Delete</button></td>
+<td>
+<button onclick="editPO(${index})">Edit</button>
+<button onclick="deletePO(${index})">Delete</button>
+</td>
 </tr>
 `
 
