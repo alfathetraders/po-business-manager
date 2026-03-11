@@ -37,26 +37,47 @@ document.getElementById("result").innerText="Estimated Profit: "+profit.toFixed(
 function savePO(){
 
 let poNumber=document.getElementById("poNumber")
+
 let client=document.getElementById("client")
 
+let department=document.getElementById("department")
+
 let amount=parseFloat(document.getElementById("amount").value||0)
+
 let invest=parseFloat(document.getElementById("investment").value||0)
 
+
 let gst=amount*18/118
+
 let ag=gst*0.20
+
 let rem=gst-ag
+
 let lawyer=rem*0.23
+
 let tax=amount*0.055
+
 let check=amount-ag-tax
+
 let profit=(check-invest)-lawyer
 
+
 let po={
+
 number:poNumber.value,
+
 client:client.value,
+
+department:department.value,
+
 amount:amount,
+
 investment:invest,
+
 profit:profit
+
 }
+
 
 let data=JSON.parse(localStorage.getItem("poData")||"[]")
 
@@ -68,6 +89,7 @@ alert("PO Saved")
 
 loadData()
 
+}
 }
 
 function loadData(){
