@@ -191,3 +191,22 @@ poList.splice(index,1)
 localStorage.setItem("poList", JSON.stringify(poList))
 
 }
+function searchPO(){
+
+let input = document.getElementById("searchPO").value.toLowerCase()
+
+let rows = document.querySelectorAll("#tableBody tr")
+
+rows.forEach(function(row){
+
+let text = row.innerText.toLowerCase()
+
+if(text.includes(input)){
+row.style.display=""
+}else{
+row.style.display="none"
+}
+
+})
+
+}
