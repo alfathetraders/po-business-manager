@@ -85,11 +85,10 @@ amount: amount,
 check: check,
 investment: investment,
 extra: extra,
-profit: profit
+profit: profit,
 roi: roi
 
 }
-
 
 poList.push(po)
 
