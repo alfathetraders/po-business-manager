@@ -225,38 +225,35 @@ row.style.display="none"
 })
 
 }
-function loadProfitChart(){
+function loadProfitGraph(){
 
-let poList = JSON.parse(localStorage.getItem("poList")) || []
+let polist = JSON.parse(localStorage.getItem("poList")) || []
 
 let labels = []
 let profits = []
 
-poList.forEach(function(po){
-
-labels.push(po.number)
+polist.forEach(function(po){
+labels.push("PO " + po.number)
 profits.push(po.profit)
-
 })
 
 let ctx = document.getElementById("profitChart")
 
-if(!ctx) return
-
-new Chart(ctx,{
-
-type:"bar",
-
-data:{
-labels:labels,
-
-datasets:[{
-label:"Profit",
-data:profits
-}]
-
+if(window.myChart){
+window.myChart.destroy()
 }
 
+window.myChart = new Chart(ctx,{
+type:'bar',
+data:{
+labels:labels,
+datasets:[
+{
+label:"Profit",
+data:profits
+}
+]
+}
 })
 
 }
