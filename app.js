@@ -81,7 +81,7 @@ alert("PO Saved")
 
 loadRecords()
 loadDashboard()
-
+showPage("records")
 }
 
 function loadRecords(){
