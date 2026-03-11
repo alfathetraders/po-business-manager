@@ -108,7 +108,7 @@ return
 
 table.innerHTML = ""
 
-poList.forEach(function(po){
+poList.forEach(function(po,index){
 
 table.innerHTML += `
 <tr>
