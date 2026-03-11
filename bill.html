@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Bill</title>
-
-<style>
+<!DOCTYPE html><html>
+<head><title>Bill</title><style>
 
 body{
 font-family:Arial;
@@ -34,12 +30,6 @@ border:1px solid black;
 
 th,td{
 padding:8px;
-font-size:14px;
-text-align:left;
-}
-
-th{
-background:#f0f0f0;
 }
 
 .total{
@@ -52,66 +42,23 @@ display:none;
 }
 }
 
-</style>
-</head>
-
-<body>
-
-<div class="top">
-
-<div>
-REF : <span id="ref"></span>
-</div>
-
-<div>
-DATE : <span id="date"></span>
-</div>
-
-</div>
-
-<p>TO</p>
-
-<p>
-<span id="dept"></span>
-</p>
-
-<div class="title">
+</style></head><body><div class="top"><div>
+REF: <span id="ref"></span>
+</div><div>
+DATE: <span id="date"></span>
+</div></div><p>TO</p><p id="dept"></p><div class="title">
 BILL
-</div>
-
-<table>
-
-<tr>
-<th>SR NO</th>
-<th>ITEMS DESCRIPTIONS</th>
-<th>SPECIFICATIONS</th>
-<th>UNIT OF MEASURE</th>
-<th>PACK SIZE</th>
+</div><table><tr><th>SR NO</th>
+<th>ITEM</th>
+<th>SPEC</th>
+<th>UNIT</th>
+<th>PACK</th>
 <th>QTY</th>
 <th>RATE</th>
-<th>AMOUNT</th>
-</tr>
-
-<tbody id="items"></tbody>
-
-<tr class="total">
-<td colspan="7">TOTAL AMOUNT</td>
-<td id="total"></td>
-</tr>
-
-<tr class="total">
-<td colspan="7">GST 18%</td>
-<td id="gst"></td>
-</tr>
-
-<tr class="total">
-<td colspan="7">GRAND TOTAL</td>
-<td id="grand"></td>
-</tr>
-
-</table>
-
-<br><br>
+<th>AMOUNT</th></tr><tbody id="items"></tbody><tr class="total"><td colspan="7">TOTAL AMOUNT</td>
+<td id="total"></td></tr><tr class="total"><td colspan="7">GST 18%</td>
+<td id="gst"></td></tr><tr class="total"><td colspan="7">GRAND TOTAL</td>
+<td id="grand"></td></tr></table><br><br>
 
 <button onclick="window.print()">Print</button>
 
@@ -119,40 +66,48 @@ BILL
 
 let po=JSON.parse(localStorage.getItem("selectedPO")||"{}")
 
-document.getElementById("ref").innerText=po.number || ""
+document.getElementById("ref").innerText=po.number
 
 document.getElementById("date").innerText=new Date().toLocaleDateString()
 
-document.getElementById("dept").innerText=po.department || ""
+document.getElementById("dept").innerText=po.department
 
-let items=document.getElementById("items")
+let table=document.getElementById("items")
 
-let total=po.amount || 0
+let total=0
 
-items.innerHTML+=`
+po.items.forEach((it,i)=>{
+
+let amount=it.qty*it.rate
+
+total+=amount
+
+table.innerHTML+=`
+
 <tr>
-<td>1</td>
-<td>Item from PO</td>
-<td>As per specification</td>
-<td>EACH</td>
-<td>1</td>
-<td>1</td>
-<td>${total}</td>
-<td>${total}</td>
+
+<td>${i+1}</td>
+<td>${it.name}</td>
+<td>${it.spec}</td>
+<td>${it.unit}</td>
+<td>${it.pack}</td>
+<td>${it.qty}</td>
+<td>${it.rate}</td>
+<td>${amount}</td>
+
 </tr>
+
 `
 
-let gst=total*0.18
+})
 
-let grand=total+gst
+let base=total/1.18
 
-document.getElementById("total").innerText=total.toFixed(2)
+let gst=total-base
 
+document.getElementById("total").innerText=base.toFixed(2)
 document.getElementById("gst").innerText=gst.toFixed(2)
+document.getElementById("grand").innerText=total.toFixed(2)
 
-document.getElementById("grand").innerText=grand.toFixed(2)
-
-</script>
-
-</body>
+</script></body>
 </html>
