@@ -86,6 +86,7 @@ check: check,
 investment: investment,
 extra: extra,
 profit: profit
+roi: roi
 
 }
 
