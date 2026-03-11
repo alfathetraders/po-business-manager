@@ -112,9 +112,7 @@ table.innerHTML=""
 poList.forEach(function(po){
 
 table.innerHTML += `
-
 <tr>
-
 <td>${po.number}</td>
 <td>${po.client}</td>
 <td>${po.amount}</td>
@@ -122,7 +120,6 @@ table.innerHTML += `
 <td>${po.investment}</td>
 <td>${po.extra}</td>
 <td>${po.profit.toFixed(2)}</td>
-
 </tr>
 
 `
