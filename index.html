@@ -1,78 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PO Business Manager Enterprise</title>
 
-<style>
+<link rel="stylesheet" href="style.css">
 
-body{
-font-family:Arial;
-margin:0;
-display:flex;
-}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-.sidebar{
-width:220px;
-background:#2c3e50;
-color:white;
-height:100vh;
-padding:20px;
-}
-
-.sidebar h2{
-margin-top:0;
-}
-
-.sidebar ul{
-list-style:none;
-padding:0;
-}
-
-.sidebar li{
-padding:10px;
-cursor:pointer;
-}
-
-.sidebar li:hover{
-background:#34495e;
-}
-
-.content{
-flex:1;
-padding:20px;
-}
-
-.hidden{
-display:none;
-}
-
-input{
-margin:5px;
-padding:5px;
-}
-
-button{
-padding:6px 10px;
-margin:5px;
-}
-
-table{
-border-collapse:collapse;
-width:100%;
-margin-top:20px;
-}
-
-table,th,td{
-border:1px solid #ccc;
-}
-
-th,td{
-padding:8px;
-}
-
-</style>
 </head>
 
 <body>
@@ -84,8 +22,20 @@ padding:8px;
 <ul>
 
 <li onclick="showPage('dashboard')">Dashboard</li>
+
 <li onclick="showPage('addpo')">Add PO</li>
+
 <li onclick="showPage('records')">Records</li>
+
+<li onclick="showPage('reports')">Reports</li>
+
+<li>
+<a href="clients.html">Clients</a>
+</li>
+
+<li>
+<a href="expenses.html">Expenses</a>
+</li>
 
 </ul>
 
@@ -93,7 +43,11 @@ padding:8px;
 
 <div class="content">
 
+<div class="header">
+
 <h1>PO Business Manager Enterprise</h1>
+
+</div>
 
 <!-- Dashboard -->
 
@@ -101,7 +55,27 @@ padding:8px;
 
 <h2>Dashboard</h2>
 
-<p>Total POs: <span id="totalPO">0</span></p>
+<div class="cards">
+
+<div class="card blue">
+
+<p>Total POs</p>
+
+<h3 id="totalPO">0</h3>
+
+</div>
+
+<div class="card green">
+
+<p>Total Profit</p>
+
+<h3 id="totalProfit">0</h3>
+
+</div>
+
+</div>
+
+<canvas id="profitChart" height="120"></canvas>
 
 </div>
 
@@ -112,9 +86,13 @@ padding:8px;
 <h2>Add PO</h2>
 
 <input id="poNumber" placeholder="PO Number"><br>
+
 <input id="client" placeholder="Client Name"><br>
+
 <input id="department" placeholder="Department"><br>
+
 <input id="amount" placeholder="PO Amount"><br>
+
 <input id="investment" placeholder="Investment"><br>
 
 <button onclick="calculate()">Calculate Profit</button>
@@ -123,9 +101,10 @@ padding:8px;
 
 <h3>Items</h3>
 
-<table>
+<table border="1" width="100%">
 
 <tr>
+
 <th>Item</th>
 <th>Spec</th>
 <th>Unit</th>
@@ -133,6 +112,7 @@ padding:8px;
 <th>Qty</th>
 <th>Rate</th>
 <th></th>
+
 </tr>
 
 <tbody id="itemsTable"></tbody>
@@ -142,10 +122,15 @@ padding:8px;
 <br>
 
 <input id="itemName" placeholder="Item">
+
 <input id="itemSpec" placeholder="Specification">
+
 <input id="itemUnit" placeholder="Unit">
+
 <input id="itemPack" placeholder="Pack">
+
 <input id="itemQty" placeholder="Qty">
+
 <input id="itemRate" placeholder="Rate">
 
 <button onclick="addItem()">Add Item</button>
@@ -162,7 +147,7 @@ padding:8px;
 
 <h2>PO Records</h2>
 
-<table>
+<table border="1" width="100%">
 
 <thead>
 
@@ -182,6 +167,16 @@ padding:8px;
 <tbody id="tableBody"></tbody>
 
 </table>
+
+</div>
+
+<!-- Reports -->
+
+<div id="reports" class="page hidden">
+
+<h2>Reports</h2>
+
+<p>Reports will appear here.</p>
 
 </div>
 
