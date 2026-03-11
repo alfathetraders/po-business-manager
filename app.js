@@ -259,46 +259,27 @@ function loadRecords(){
 
 poList = JSON.parse(localStorage.getItem("poList")) || []
 
-let table=document.getElementById("tableBody")
+let table = document.getElementById("tableBody")
 
-if(!table) return
+if(!table){
+return
+}
 
 table.innerHTML=""
 
 poList.forEach((po,i)=>{
 
-table.innerHTML+=`
-
+table.innerHTML += `
 <tr>
-
 <td>${po.number}</td>
-
 <td>${po.client}</td>
-
 <td>${po.amount}</td>
-
 <td>${po.check.toFixed(2)}</td>
-
 <td>${po.investment}</td>
-
 <td>${po.extra}</td>
-
 <td>${po.profit.toFixed(2)}</td>
-
 <td>${po.date}</td>
-
-<td>
-
-<button onclick="openBill(${i})">Bill</button>
-
-<button onclick="openInvoice(${i})">Invoice</button>
-
-<button onclick="openDC(${i})">DC</button>
-
-</td>
-
 </tr>
-
 `
 
 })
