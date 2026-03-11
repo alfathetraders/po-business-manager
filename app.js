@@ -394,3 +394,27 @@ document.getElementById("amount").value = amount[2]
 }
 
 }
+function fillPOForm(text){
+
+let po = text.match(/(PO|Purchase Order)[^\d]*(\d+)/i)
+let amount = text.match(/(Total|Amount)[^\d]*(\d+)/i)
+let client = text.match(/Client[:\s](.)/i)
+let dept = text.match(/Department[:\s](.)/i)
+
+if(po){
+document.getElementById("poNumber").value = po[2]
+}
+
+if(amount){
+document.getElementById("amount").value = amount[2]
+}
+
+if(client){
+document.getElementById("client").value = client[1]
+}
+
+if(dept){
+document.getElementById("department").value = dept[1]
+}
+
+}
