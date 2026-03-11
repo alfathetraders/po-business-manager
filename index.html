@@ -1,39 +1,29 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
-<title>PO Business Manager</title>
-
+<title>PO Business Manager Enterprise</title>
 <link rel="stylesheet" href="style.css">
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body>
 
 <div class="sidebar">
-
 <h2>PO Manager</h2>
 
 <ul>
-
 <li onclick="showPage('dashboard')">Dashboard</li>
 <li onclick="showPage('addpo')">Add PO</li>
 <li onclick="showPage('records')">Records</li>
-<li onclick="showPage('reports')">Reports</li>
-
 <li><a href="clients.html">Clients</a></li>
 <li><a href="expenses.html">Expenses</a></li>
-
 </ul>
 
 </div>
 
+
 <div class="content">
 
-<h1>PO Business Manager</h1>
+<h1>PO Business Manager Enterprise</h1>
 
 <!-- Dashboard -->
 
@@ -45,9 +35,9 @@
 
 <p>Total Profit: <span id="totalProfit">0</span></p>
 
-<canvas id="profitChart"></canvas>
-
 </div>
+
+
 
 <!-- Add PO -->
 
@@ -55,19 +45,22 @@
 
 <h2>Add PO</h2>
 
-<input id="poNumber" placeholder="PO Number"><br>
+<input id="poNumber" placeholder="PO Number"><br><br>
 
-<input id="client" placeholder="Client Name"><br>
+<input id="client" placeholder="Client Name"><br><br>
 
-<input id="department" placeholder="Department"><br>
+<input id="department" placeholder="Department"><br><br>
 
-<input id="amount" placeholder="PO Amount"><br>
+<input id="amount" placeholder="PO Amount"><br><br>
 
-<input id="investment" placeholder="Investment"><br>
+<input id="investment" placeholder="Investment"><br><br>
+
+<input id="extra" placeholder="Extra Expense"><br><br>
 
 <button onclick="calculate()">Calculate</button>
 
 <p id="result"></p>
+
 
 <h3>Items</h3>
 
@@ -75,7 +68,7 @@
 
 <tr>
 <th>Item</th>
-<th>Spec</th>
+<th>Specification</th>
 <th>Unit</th>
 <th>Pack</th>
 <th>Qty</th>
@@ -86,6 +79,7 @@
 <tbody id="itemsTable"></tbody>
 
 </table>
+
 
 <input id="itemName" placeholder="Item">
 <input id="itemSpec" placeholder="Specification">
@@ -102,6 +96,8 @@
 
 </div>
 
+
+
 <!-- Records -->
 
 <div id="records" class="page hidden">
@@ -117,8 +113,9 @@
 <th>PO Amount</th>
 <th>Check Amount</th>
 <th>Investment</th>
+<th>Extra Expense</th>
 <th>Profit</th>
-<th>Actions</th>
+<th>Documents</th>
 
 </tr>
 
@@ -128,20 +125,10 @@
 
 </div>
 
-<!-- Reports -->
-
-<div id="reports" class="page hidden">
-
-<h2>Reports</h2>
-
-<canvas id="reportChart"></canvas>
-
-</div>
 
 </div>
 
 <script src="app.js"></script>
 
 </body>
-
 </html>
