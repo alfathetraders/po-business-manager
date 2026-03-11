@@ -70,6 +70,10 @@ let govtGST = gst * 0.20
 let check = amount - incomeTax - govtGST
 
 let profit = check - investment - extra
+let roi = 0
+if(investment > 0){
+roi = (profit / investment) * 100
+}
 
 
 let po = {
