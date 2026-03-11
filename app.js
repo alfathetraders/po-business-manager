@@ -290,3 +290,31 @@ alert("PO Data Read Successfully")
 })
 
 }
+function readPOImage(){
+
+let file = document.getElementById("poImage").files[0]
+
+if(!file){
+alert("Upload PO Image First")
+return
+}
+
+Tesseract.recognize(file,'eng')
+.then(({ data: { text } }) => {
+
+let po = text.match(/PO\s*No[:\s]*([0-9]+)/i)
+let amount = text.match(/Amount[:\s]*([0-9]+)/i)
+
+if(po){
+document.getElementById("poNumber").value = po[1]
+}
+
+if(amount){
+document.getElementById("amount").value = amount[1]
+}
+
+alert("PO Data Read")
+
+})
+
+}
