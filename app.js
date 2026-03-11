@@ -101,15 +101,15 @@ loadDashboard()
 
 function loadRecords(){
 
-poList = JSON.parse(localStorage.getItem("poList")) || []
+let polist = JSON.parse(localStorage.getItem("poList")) || []
 
-let table=document.getElementById("tableBody")
+let table = document.getElementById("tableBody")
 
 if(!table) return
 
 table.innerHTML=""
 
-poList.forEach(function(po){
+polist.forEach(function(po){
 
 table.innerHTML += `
 <tr>
@@ -126,7 +126,6 @@ table.innerHTML += `
 })
 
 }
-
 
 
 function loadDashboard(){
