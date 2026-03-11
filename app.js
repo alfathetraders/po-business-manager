@@ -120,8 +120,8 @@ table.innerHTML += `
 <td>${po.extra}</td>
 <td>${(po.profit || 0).toFixed(2)}</td>
 <td>
-<button onclick="editPO(${index})">Edit</button>
-<button onclick="deletePO(${index})">Delete</button>
+<button onclick="editPO(${index})">✏ Edit</button>
+<button onclick="deletePO(${index})">🗑 Delete</button>
 </td>
 </tr>
 `
