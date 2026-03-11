@@ -171,3 +171,23 @@ loadRecords()
 loadDashboard()
 
 }
+function editPO(index){
+
+let poList = JSON.parse(localStorage.getItem("poList")) || []
+
+let po = poList[index]
+
+document.getElementById("poNumber").value = po.number
+document.getElementById("client").value = po.client
+document.getElementById("department").value = po.department
+document.getElementById("amount").value = po.amount
+document.getElementById("investment").value = po.investment
+document.getElementById("extra").value = po.extra
+
+showPage("addpo")
+
+poList.splice(index,1)
+
+localStorage.setItem("poList", JSON.stringify(poList))
+
+}
