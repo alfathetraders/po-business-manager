@@ -370,3 +370,27 @@ document.getElementById("amount").value = amount[1]
 alert("PO Data Read Successfully")
 
 }
+function smartExtract(text){
+
+let poNumber = text.match(/(PO|Purchase Order)[^\d]*(\d+)/i)
+let client = text.match(/Client[:\s]*([A-Za-z ]+)/i)
+let department = text.match(/Department[:\s]*([A-Za-z ]+)/i)
+let amount = text.match(/(Total|Amount)[^\d]*(\d+)/i)
+
+if(poNumber){
+document.getElementById("poNumber").value = poNumber[2]
+}
+
+if(client){
+document.getElementById("client").value = client[1]
+}
+
+if(department){
+document.getElementById("department").value = department[1]
+}
+
+if(amount){
+document.getElementById("amount").value = amount[2]
+}
+
+}
