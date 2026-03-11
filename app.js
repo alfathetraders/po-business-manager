@@ -430,46 +430,25 @@ function aiSmartPOReader(text){
 
 text = text.replace(/\n/g," ")
 
-let poPatterns = [
-/PO\s*No\.?\s*[:#]?\s*([A-Za-z0-9\-]+)/i,
-/P\.O\s*#\s*([A-Za-z0-9\-]+)/i,
-/Purchase\s*Order\s*No\.?\s*([A-Za-z0-9\-]+)/i,
-/Order\s*No\.?\s*([A-Za-z0-9\-]+)/i
-]
+console.log("OCR TEXT:",text)
 
-let amountPatterns = [
-/Total\s*Amount\s*[:]?[\sRs\.]*([0-9,]+)/i,
-/Grand\s*Total\s*[:]?[\sRs\.]*([0-9,]+)/i,
-/Amount\s*[:]?[\sRs\.]*([0-9,]+)/i
-]
+let amountMatch = text.match(/Total\s*Inclusive\s*Tax\s*Amount\s*PKR\s*([0-9,\.]+)/i)
 
-for(let p of poPatterns){
-let m = text.match(p)
-if(m){
-document.getElementById("poNumber").value = m[1]
-break
-}
+if(!amountMatch){
+amountMatch = text.match(/Total\s*Exclusive\s*Tax\s*Amount\s*PKR\s*([0-9,\.]+)/i)
 }
 
-for(let p of amountPatterns){
-let m = text.match(p)
-if(m){
-document.getElementById("amount").value = m[1].replace(/,/g,"")
-break
-}
+if(!amountMatch){
+amountMatch = text.match(/Total\s*PKR\s*([0-9,\.]+)/i)
 }
 
-let client = text.match(/Client\s*[:\-]\s*([A-Za-z ]+)/i)
+if(amountMatch){
 
-if(client){
-document.getElementById("client").value = client[1]
-}
+let amount = amountMatch[1]
+amount = amount.replace(/,/g,"")
 
-let dept = text.match(/Department\s*[:\-]\s*([A-Za-z ]+)/i)
-
-if(dept){
-document.getElementById("department").value = dept[1]
-}
+document.getElementById("amount").value = amount
 
 }
+
 }
