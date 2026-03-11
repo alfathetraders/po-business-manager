@@ -295,26 +295,60 @@ function readPOImage(){
 let file = document.getElementById("poImage").files[0]
 
 if(!file){
-alert("Upload PO Image First")
+alert("Upload PO Image or PDF")
 return
 }
 
-Tesseract.recognize(file,'eng')
-.then(({ data: { text } }) => {
+let fileType = file.type
 
-let po = text.match(/PO\s*No[:\s]*([0-9]+)/i)
-let amount = text.match(/Amount[:\s]*([0-9]+)/i)
+if(fileType === "application/pdf"){
 
-if(po){
-document.getElementById("poNumber").value = po[1]
-}
+let reader = new FileReader()
 
-if(amount){
-document.getElementById("amount").value = amount[1]
-}
+reader.onload = function(){
 
-alert("PO Data Read")
+let typedarray = new Uint8Array(this.result)
+
+pdfjsLib.getDocument(typedarray).promise.then(function(pdf){
+
+pdf.getPage(1).then(function(page){
+
+let viewport = page.getViewport({scale:2})
+let canvas = document.createElement("canvas")
+let context = canvas.getContext("2d")
+
+canvas.height = viewport.height
+canvas.width = viewport.width
+
+page.render({
+canvasContext:context,
+viewport:viewport
+}).promise.then(function(){
+
+Tesseract.recognize(canvas,'eng').then(({data:{text}})=>{
+
+fillPOData(text)
 
 })
+
+})
+
+})
+
+})
+
+}
+
+reader.readAsArrayBuffer(file)
+
+}else{
+
+Tesseract.recognize(file,'eng').then(({data:{text}})=>{
+
+fillPOData(text)
+
+})
+
+}
 
 }
