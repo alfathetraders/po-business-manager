@@ -352,3 +352,21 @@ fillPOData(text)
 }
 
 }
+function fillPOData(text){
+
+console.log(text)
+
+let po = text.match(/PO\s*No[:\s]*([0-9]+)/i)
+let amount = text.match(/Amount[:\s]*([0-9]+)/i)
+
+if(po){
+document.getElementById("poNumber").value = po[1]
+}
+
+if(amount){
+document.getElementById("amount").value = amount[1]
+}
+
+alert("PO Data Read Successfully")
+
+}
