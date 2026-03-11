@@ -274,15 +274,25 @@ logger: m => console.log(m)
 
 console.log(text)
 
-let poMatch = text.match(/PO\s*No[:\s]*([0-9]+)/i)
-let amountMatch = text.match(/Amount[:\s]*([0-9]+)/i)
+let poMatch = text.match(/(PO|Purchase Order)[^\d]*([0-9]+)/i)
+let amountMatch = text.match(/(Total|Amount)[^\d]*([0-9,]+)/i)
+let clientMatch = text.match(/Client[:\s]*([A-Za-z ]+)/i)
+let deptMatch = text.match(/Department[:\s]*([A-Za-z ]+)/i)
 
 if(poMatch){
-document.getElementById("poNumber").value = poMatch[1]
+document.getElementById("poNumber").value = poMatch[2]
 }
 
 if(amountMatch){
-document.getElementById("amount").value = amountMatch[1]
+document.getElementById("amount").value = amountMatch[2].replace(/,/g,'')
+}
+
+if(clientMatch){
+document.getElementById("client").value = clientMatch[1]
+}
+
+if(deptMatch){
+document.getElementById("department").value = deptMatch[1]
 }
 
 alert("PO Data Read Successfully")
