@@ -1,18 +1,25 @@
-body{
+زbody{
 
-font-family:Arial;
 margin:0;
+font-family:Arial;
 
 }
 
+
 .sidebar{
 
-width:200px;
+width:220px;
+height:100vh;
 background:#1f4e79;
 color:white;
-height:100vh;
 position:fixed;
 padding:20px;
+
+}
+
+.sidebar h2{
+
+margin-bottom:30px;
 
 }
 
@@ -25,7 +32,7 @@ padding:0;
 
 .sidebar li{
 
-padding:10px;
+padding:12px;
 cursor:pointer;
 
 }
@@ -36,23 +43,84 @@ background:#2f6ea6;
 
 }
 
+
+
 .content{
 
-margin-left:220px;
-padding:20px;
+margin-left:240px;
+padding:30px;
 
 }
+
+
+
+.cards{
+
+display:flex;
+gap:20px;
+
+}
+
+
+
+.card{
+
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+width:200px;
+text-align:center;
+
+}
+
+.card h3{
+
+margin:0;
+
+}
+
+.card p{
+
+font-size:22px;
+font-weight:bold;
+
+}
+
+
+
+input{
+
+padding:8px;
+width:250px;
+
+}
+
+
+
+button{
+
+padding:10px 15px;
+background:#1f4e79;
+color:white;
+border:none;
+cursor:pointer;
+
+}
+
+
 
 table{
 
 width:100%;
 border-collapse:collapse;
+margin-top:20px;
 
 }
 
 table,th,td{
 
-border:1px solid #ccc;
+border:1px solid #ddd;
 
 }
 
@@ -62,6 +130,8 @@ padding:10px;
 text-align:left;
 
 }
+
+
 
 .hidden{
 
