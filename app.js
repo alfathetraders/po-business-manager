@@ -121,7 +121,6 @@ table.innerHTML += `
 <td>${po.extra}</td>
 <td>${po.profit.toFixed(2)}</td>
 </tr>
-
 `
 
 })
