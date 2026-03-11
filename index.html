@@ -1,17 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PO Business Manager Enterprise</title>
+
 <link rel="stylesheet" href="style.css">
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
+
 <body>
 
 <div class="sidebar">
+
 <h2>PO Manager</h2>
+
 <ul>
 <li onclick="showPage('dashboard')">Dashboard</li>
 <li onclick="showPage('addpo')">Add PO</li>
@@ -20,30 +27,46 @@
 <li><a href="clients.html">Clients</a></li>
 <li><a href="expenses.html">Expenses</a></li>
 </ul>
+
 </div>
 
-<div class="main">
+
+<div class="content">
 
 <div class="header">
 <h1>PO Business Manager Enterprise</h1>
 </div>
 
+
+<!-- Dashboard -->
+
 <div id="dashboard" class="page">
+
 <h2>Dashboard</h2>
+
 <div class="cards">
+
 <div class="card blue">
 <p>Total POs</p>
 <h3 id="totalPO">0</h3>
 </div>
+
 <div class="card green">
 <p>Total Profit</p>
 <h3 id="totalProfit">0</h3>
-<canvas id="profitChart" height="120"></canvas> 
-</div>
-</div>
 </div>
 
+</div>
+
+<canvas id="profitChart" height="120"></canvas>
+
+</div>
+
+
+<!-- Add PO -->
+
 <div id="addpo" class="page hidden">
+
 <h2>Add PO</h2>
 
 <input id="poNumber" placeholder="PO Number"><br>
@@ -59,11 +82,17 @@
 
 </div>
 
+
+<!-- Records -->
+
 <div id="records" class="page hidden">
+
 <h2>PO Records</h2>
 
-<table>
+<table border="1" width="100%">
+
 <thead>
+
 <tr>
 <th>PO</th>
 <th>Client</th>
@@ -71,6 +100,7 @@
 <th>Investment</th>
 <th>Profit</th>
 </tr>
+
 </thead>
 
 <tbody id="tableBody"></tbody>
@@ -79,15 +109,24 @@
 
 </div>
 
+
+<!-- Reports -->
+
 <div id="reports" class="page hidden">
+
 <h2>Reports</h2>
-<p>Profit and business summary available in dashboard.</p>
-<button onclick="downloadBackup()">Download Backup</button>
+
+<p>Reports will appear here.</p>
+
 </div>
 
 </div>
-<!-- update -->
 
+
+<script src="app.js"></script>
+
+</body>
+</html>
 <script src="app.js"></script>
 </body>
 </html>
