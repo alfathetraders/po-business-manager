@@ -1,55 +1,70 @@
 body{
+
 font-family:Arial;
 margin:0;
+
 }
 
 .sidebar{
-width:220px;
-height:100vh;
-background:#2c5ea3;
+
+width:200px;
+background:#1f4e79;
 color:white;
+height:100vh;
 position:fixed;
 padding:20px;
+
 }
 
 .sidebar ul{
+
 list-style:none;
 padding:0;
+
 }
 
 .sidebar li{
+
 padding:10px;
 cursor:pointer;
+
 }
 
-.sidebar a{
-color:white;
-text-decoration:none;
+.sidebar li:hover{
+
+background:#2f6ea6;
+
 }
 
 .content{
-margin-left:240px;
+
+margin-left:220px;
 padding:20px;
+
 }
 
 table{
+
 width:100%;
 border-collapse:collapse;
+
 }
 
 table,th,td{
+
 border:1px solid #ccc;
+
 }
 
 th,td{
-padding:8px;
+
+padding:10px;
+text-align:left;
+
 }
 
 .hidden{
-display:none;
-}
 
-button{
-padding:6px 12px;
-margin:3px;
+display:none;
+
 }
