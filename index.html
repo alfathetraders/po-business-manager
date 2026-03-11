@@ -11,7 +11,6 @@
 
 <body>
 
-
 <div class="sidebar">
 
 <h2>PO Manager</h2>
@@ -24,20 +23,14 @@
 
 <li onclick="showPage('records')">Records</li>
 
-<li><a href="clients.html">Clients</a></li>
-
-<li><a href="expenses.html">Expenses</a></li>
-
 </ul>
 
 </div>
 
 
-
 <div class="content">
 
-<h1>PO Business Manager System</h1>
-
+<h1>PO Business Manager</h1>
 
 
 <!-- DASHBOARD -->
@@ -54,40 +47,21 @@
 
 
 
-
 <!-- ADD PO -->
 
 <div id="addpo" class="page hidden">
 
-<h2>Add Purchase Order</h2>
-
-
-<label>PO Number</label>
+<h2>Add PO</h2>
 
 <input id="poNumber" placeholder="PO Number"><br><br>
 
-
-<label>Client</label>
-
-<input id="client" placeholder="Client Name"><br><br>
-
-
-<label>Department</label>
+<input id="client" placeholder="Client"><br><br>
 
 <input id="department" placeholder="Department"><br><br>
 
-
-<label>PO Amount</label>
-
 <input id="amount" placeholder="PO Amount"><br><br>
 
-
-<label>Investment</label>
-
 <input id="investment" placeholder="Investment"><br><br>
-
-
-<label>Extra Expense</label>
 
 <input id="extra" placeholder="Extra Expense"><br><br>
 
@@ -97,60 +71,7 @@
 <p id="result"></p>
 
 
-
-<h3>PO Items</h3>
-
-<table>
-
-<tr>
-
-<th>Item</th>
-
-<th>Specification</th>
-
-<th>Unit</th>
-
-<th>Pack</th>
-
-<th>Qty</th>
-
-<th>Rate</th>
-
-<th>Amount</th>
-
-<th>Action</th>
-
-</tr>
-
-<tbody id="itemsTable"></tbody>
-
-</table>
-
-
-
-<br>
-
-<input id="itemName" placeholder="Item">
-
-<input id="itemSpec" placeholder="Specification">
-
-<input id="itemUnit" placeholder="Unit">
-
-<input id="itemPack" placeholder="Pack">
-
-<input id="itemQty" placeholder="Qty">
-
-<input id="itemRate" placeholder="Rate">
-
-
-<button onclick="addItem()">Add Item</button>
-
-
-<br><br>
-
-
 <button onclick="savePO()">Save PO</button>
-
 
 </div>
 
@@ -166,14 +87,15 @@
 <table>
 
 <tr>
-<th>PO Number</th>
+
+<th>PO</th>
 <th>Client</th>
 <th>PO Amount</th>
 <th>Check Amount</th>
 <th>Investment</th>
 <th>Extra</th>
 <th>Profit</th>
-<th>Date</th>
+
 </tr>
 
 <tbody id="tableBody"></tbody>
@@ -183,12 +105,10 @@
 </div>
 
 
-
 </div>
 
 
 <script src="app.js"></script>
-
 
 </body>
 
