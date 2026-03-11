@@ -161,7 +161,7 @@ totalProfit += po.profit || 0
 document.getElementById("totalPO").innerText = totalPO
 document.getElementById("totalProfit").innerText = totalProfit.toFixed(2)
 
-loadProfitChart()
+loadProfitGraph()
 
 }
 
