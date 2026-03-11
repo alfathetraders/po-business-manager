@@ -7,32 +7,52 @@
 <style>
 
 body{
-font-family:Arial;
-padding:40px;
+font-family: Arial;
+margin:120px 60px;
 }
 
-.header{
+.top{
+display:flex;
+justify-content:space-between;
+margin-bottom:40px;
+}
+
+.title{
 text-align:center;
-margin-bottom:30px;
+font-size:28px;
+font-weight:bold;
+margin-bottom:20px;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
-margin-top:20px;
 }
 
 table,th,td{
 border:1px solid black;
-padding:10px;
 }
 
+th,td{
+padding:8px;
+font-size:14px;
+text-align:left;
+}
+
+th{
+background:#f0f0f0;
+}
+
+.total{
+font-weight:bold;
+}
+
+@media print{
+
 button{
-margin-top:20px;
-padding:10px 20px;
-background:#2d7df6;
-color:white;
-border:none;
+display:none;
+}
+
 }
 
 </style>
@@ -41,54 +61,119 @@ border:none;
 
 <body>
 
-<div class="header">
+<div class="top">
 
-<h2>BILL</h2>
+<div>
+REF: <span id="ref"></span>
+</div>
 
-<h3>ALFATEH TRADERS</h3>
+<div>
+DATE: <span id="date"></span>
+</div>
 
 </div>
 
-<b>PO Number:</b> <span id="po"></span><br><br>
+<p>TO</p>
 
-<b>Client:</b> <span id="client"></span><br><br>
+<p>
+ADDITIONAL INSPECTOR GENERAL  
+RIOT MANAGEMENT POLICE (RMP)
+</p>
 
-<b>Date:</b> <span id="date"></span>
+<div class="title">
+BILL
+</div>
 
 <table>
 
 <tr>
 
-<th>Description</th>
+<th>SR NO</th>
 
-<th>Amount</th>
+<th>ITEMS DESCRIPTIONS</th>
+
+<th>SPECIFICATIONS</th>
+
+<th>UNIT OF MEASURE</th>
+
+<th>PACK SIZE</th>
+
+<th>QTY</th>
+
+<th>RATE</th>
+
+<th>AMOUNT</th>
 
 </tr>
 
-<tr>
+<tbody id="items">
 
-<td>Supply as per Purchase Order</td>
+</tbody>
 
-<td id="amount"></td>
+<tr class="total">
+
+<td colspan="7">TOTAL AMOUNT</td>
+
+<td id="total"></td>
+
+</tr>
+
+<tr class="total">
+
+<td colspan="7">GST 18%</td>
+
+<td id="gst"></td>
+
+</tr>
+
+<tr class="total">
+
+<td colspan="7">GRAND TOTAL</td>
+
+<td id="grand"></td>
 
 </tr>
 
 </table>
 
-<button onclick="window.print()">
+<br><br>
 
-Print Bill
-
-</button>
+<button onclick="window.print()">Print</button>
 
 <script>
 
-let data=JSON.parse(localStorage.getItem("selectedPO"))
+let po=JSON.parse(localStorage.getItem("selectedPO")||"{}")
 
-document.getElementById("po").innerText=data.number
-document.getElementById("client").innerText=data.client
-document.getElementById("amount").innerText=data.amount
+document.getElementById("ref").innerText=po.number
+
 document.getElementById("date").innerText=new Date().toLocaleDateString()
+
+let items=document.getElementById("items")
+
+let total=po.amount||0
+
+items.innerHTML+=`
+<tr>
+<td>1</td>
+<td>Item from PO</td>
+<td>As per specification</td>
+<td>EACH</td>
+<td>1</td>
+<td>1</td>
+<td>${total}</td>
+<td>${total}</td>
+</tr>
+`
+
+let gst=total*0.18
+
+let grand=total+gst
+
+document.getElementById("total").innerText=total.toFixed(2)
+
+document.getElementById("gst").innerText=gst.toFixed(2)
+
+document.getElementById("grand").innerText=grand.toFixed(2)
 
 </script>
 
