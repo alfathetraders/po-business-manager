@@ -210,3 +210,38 @@ row.style.display="none"
 })
 
 }
+function loadProfitChart(){
+
+let poList = JSON.parse(localStorage.getItem("poList")) || []
+
+let labels = []
+let profits = []
+
+poList.forEach(function(po){
+
+labels.push(po.number)
+profits.push(po.profit)
+
+})
+
+let ctx = document.getElementById("profitChart")
+
+if(!ctx) return
+
+new Chart(ctx,{
+
+type:"bar",
+
+data:{
+labels:labels,
+
+datasets:[{
+label:"Profit",
+data:profits
+}]
+
+}
+
+})
+
+}
