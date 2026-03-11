@@ -1,5 +1,6 @@
 let poList = JSON.parse(localStorage.getItem("poList")) || []
 
+
 function showPage(page){
 
 document.querySelectorAll(".page").forEach(function(p){
@@ -17,6 +18,8 @@ loadDashboard()
 }
 
 }
+
+
 
 function calculate(){
 
@@ -40,6 +43,8 @@ document.getElementById("result").innerHTML =
 
 }
 
+
+
 function savePO(){
 
 let number = document.getElementById("poNumber").value
@@ -50,6 +55,7 @@ let amount = parseFloat(document.getElementById("amount").value) || 0
 let investment = parseFloat(document.getElementById("investment").value) || 0
 let extra = parseFloat(document.getElementById("extra").value) || 0
 
+
 let base = amount / 1.18
 let gst = amount - base
 
@@ -59,6 +65,7 @@ let govtGST = gst * 0.20
 let check = amount - incomeTax - govtGST
 
 let profit = check - investment - extra
+
 
 let po = {
 
@@ -73,6 +80,7 @@ profit: profit
 
 }
 
+
 poList.push(po)
 
 localStorage.setItem("poList", JSON.stringify(poList))
@@ -81,8 +89,12 @@ alert("PO Saved")
 
 loadRecords()
 loadDashboard()
+
 showPage("records")
+
 }
+
+
 
 function loadRecords(){
 
@@ -90,14 +102,15 @@ let poList = JSON.parse(localStorage.getItem("poList")) || []
 
 let table = document.getElementById("tableBody")
 
-if(!table) return
+if(!table){
+return
+}
 
 table.innerHTML = ""
 
 poList.forEach(function(po){
 
 table.innerHTML += `
-
 <tr>
 <td>${po.number}</td>
 <td>${po.client}</td>
@@ -108,9 +121,12 @@ table.innerHTML += `
 <td>${po.profit.toFixed(2)}</td>
 </tr>
 `
+
 })
 
 }
+
+
 
 function loadDashboard(){
 
@@ -129,12 +145,13 @@ document.getElementById("totalProfit").innerText = totalProfit.toFixed(2)
 
 }
 
-document.addEventListener("DOMContentLoaded", function(){
 
-showPage("dashboard")
 
-loadRecords()
+document.addEventListener("DOMContentLoaded",function(){
 
 loadDashboard()
+loadRecords()
+
+showPage("dashboard")
 
 })
