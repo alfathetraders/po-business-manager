@@ -255,3 +255,38 @@ data:profits
 })
 
 }
+function readPOImage(){
+
+let file = document.getElementById("poImage").files[0]
+
+if(!file){
+alert("Please upload PO image")
+return
+}
+
+Tesseract.recognize(
+file,
+'eng',
+{
+logger: m => console.log(m)
+}
+).then(({ data: { text } }) => {
+
+console.log(text)
+
+let poMatch = text.match(/PO\s*No[:\s]*([0-9]+)/i)
+let amountMatch = text.match(/Amount[:\s]*([0-9]+)/i)
+
+if(poMatch){
+document.getElementById("poNumber").value = poMatch[1]
+}
+
+if(amountMatch){
+document.getElementById("amount").value = amountMatch[1]
+}
+
+alert("PO Data Read Successfully")
+
+})
+
+}
