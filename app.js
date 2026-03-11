@@ -141,14 +141,15 @@ let totalPO = poList.length
 let totalProfit = 0
 
 poList.forEach(function(po){
-totalProfit += po.profit
+totalProfit += po.profit || 0
 })
 
 document.getElementById("totalPO").innerText = totalPO
 document.getElementById("totalProfit").innerText = totalProfit.toFixed(2)
 
-}
+loadProfitChart()
 
+}
 
 
 document.addEventListener("DOMContentLoaded",function(){
