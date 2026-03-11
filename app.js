@@ -1,17 +1,19 @@
 let poList = JSON.parse(localStorage.getItem("poList")) || []
 
+let poItems = []
+
 // ================= PAGE SWITCH =================
 
 function showPage(page){
 
-document.querySelectorAll(".page").forEach(function(p){
+document.querySelectorAll(".page").forEach(p=>{
 p.classList.add("hidden")
 })
 
 document.getElementById(page).classList.remove("hidden")
 
-if(page === "records"){ loadRecords() }
-if(page === "dashboard"){ loadDashboard() }
+if(page==="records") loadRecords()
+if(page==="dashboard") loadDashboard()
 
 }
 
@@ -34,14 +36,18 @@ let check = po - incomeTax - govtGST
 let profit = check - investment - extra
 
 let roi = 0
-if(investment > 0){
-roi = (profit / investment) * 100
+if(investment>0){
+roi = (profit/investment)*100
 }
 
 document.getElementById("result").innerHTML =
-"Check Amount: " + check.toFixed(2) + "<br>" +
-"Profit: " + profit.toFixed(2) + "<br>" +
-"Investment ROI: " + roi.toFixed(2) + "%"
+"PO Base Amount: "+base.toFixed(2)+"<br>"+
+"GST (18%): "+gst.toFixed(2)+"<br>"+
+"Govt GST Cut: "+govtGST.toFixed(2)+"<br>"+
+"Income Tax (5.5%): "+incomeTax.toFixed(2)+"<br>"+
+"Check Amount: "+check.toFixed(2)+"<br>"+
+"Profit: "+profit.toFixed(2)+"<br>"+
+"ROI: "+roi.toFixed(2)+"%"
 
 }
 
@@ -49,46 +55,31 @@ document.getElementById("result").innerHTML =
 
 function savePO(){
 
-let number = document.getElementById("poNumber").value
-let client = document.getElementById("client").value
-let department = document.getElementById("department").value
-
-let amount = parseFloat(document.getElementById("amount").value) || 0
-let investment = parseFloat(document.getElementById("investment").value) || 0
-let extra = parseFloat(document.getElementById("extra").value) || 0
-
-let base = amount / 1.18
-let gst = amount - base
-
-let incomeTax = amount * 0.055
-let govtGST = gst * 0.20
-
-let check = amount - incomeTax - govtGST
-
-let profit = check - investment - extra
-
-let roi = 0
-if(investment > 0){
-roi = (profit / investment) * 100
-}
-
 let po = {
-number,
-client,
-department,
-amount,
-check,
-investment,
-extra,
-profit,
-roi
+number: document.getElementById("poNumber").value,
+client: document.getElementById("client").value,
+department: document.getElementById("department").value,
+amount: parseFloat(document.getElementById("amount").value)||0,
+investment: parseFloat(document.getElementById("investment").value)||0,
+extra: parseFloat(document.getElementById("extra").value)||0,
+items: poItems
 }
+
+let base = po.amount/1.18
+let gst = po.amount-base
+
+let incomeTax = po.amount*0.055
+let govtGST = gst*0.20
+
+po.check = po.amount-incomeTax-govtGST
+po.profit = po.check-po.investment-po.extra
+po.roi = po.investment>0 ? (po.profit/po.investment)*100 : 0
 
 poList.push(po)
 
-localStorage.setItem("poList", JSON.stringify(poList))
+localStorage.setItem("poList",JSON.stringify(poList))
 
-alert("PO Saved Successfully")
+alert("PO Saved")
 
 loadRecords()
 loadDashboard()
@@ -102,18 +93,16 @@ showPage("records")
 function loadRecords(){
 
 let table = document.getElementById("tableBody")
-
 if(!table) return
 
-table.innerHTML = ""
+table.innerHTML=""
 
-poList.forEach(function(po,index){
+poList.forEach((po,index)=>{
 
-table.innerHTML += `
+table.innerHTML+=`
 <tr>
 <td>${po.number}</td>
 <td>${po.client}</td>
-<td>${po.department}</td>
 <td>${po.amount}</td>
 <td>${po.check.toFixed(2)}</td>
 <td>${po.investment}</td>
@@ -123,6 +112,7 @@ table.innerHTML += `
 <td>
 <button onclick="editPO(${index})">Edit</button>
 <button onclick="deletePO(${index})">Delete</button>
+<button onclick="generateInvoice(${index})">Invoice</button>
 </td>
 </tr>
 `
@@ -138,75 +128,17 @@ function loadDashboard(){
 let totalPO = poList.length
 let totalProfit = 0
 
-poList.forEach(function(po){
-totalProfit += po.profit || 0
+poList.forEach(po=>{
+totalProfit+=po.profit
 })
 
-document.getElementById("totalPO").innerText = totalPO
-document.getElementById("totalProfit").innerText = totalProfit.toFixed(2)
+let poEl = document.getElementById("totalPO")
+let profitEl = document.getElementById("totalProfit")
+
+if(poEl) poEl.innerText=totalPO
+if(profitEl) profitEl.innerText=totalProfit.toFixed(2)
 
 loadProfitGraph()
-
-}
-
-document.addEventListener("DOMContentLoaded",function(){
-
-loadDashboard()
-loadRecords()
-showPage("dashboard")
-
-})
-
-// ================= DELETE =================
-
-function deletePO(index){
-
-poList.splice(index,1)
-
-localStorage.setItem("poList", JSON.stringify(poList))
-
-loadRecords()
-loadDashboard()
-
-}
-
-// ================= EDIT =================
-
-function editPO(index){
-
-let po = poList[index]
-
-document.getElementById("poNumber").value = po.number
-document.getElementById("client").value = po.client
-document.getElementById("department").value = po.department
-document.getElementById("amount").value = po.amount
-document.getElementById("investment").value = po.investment
-document.getElementById("extra").value = po.extra
-
-showPage("addpo")
-
-poList.splice(index,1)
-
-}
-
-// ================= SEARCH =================
-
-function searchPO(){
-
-let input = document.getElementById("searchPO").value.toLowerCase()
-let rows = document.querySelectorAll("#tableBody tr")
-
-rows.forEach(function(row){
-
-let text = row.innerText.toLowerCase()
-
-if(text.includes(input)){
-row.style.display=""
-}else{
-row.style.display="none"
-}
-
-})
 
 }
 
@@ -214,24 +146,24 @@ row.style.display="none"
 
 function loadProfitGraph(){
 
-let labels = []
-let profits = []
+let chart=document.getElementById("profitChart")
+if(!chart) return
 
-poList.forEach(function(po){
-labels.push("PO " + po.number)
+let labels=[]
+let profits=[]
+
+poList.forEach(po=>{
+labels.push("PO "+po.number)
 profits.push(po.profit)
 })
 
-let chart = document.getElementById("profitChart")
-if(!chart) return
+let ctx=chart.getContext("2d")
 
-let ctx = chart.getContext("2d")
-
-if(window.profitGraph){
-window.profitGraph.destroy()
+if(window.graph){
+window.graph.destroy()
 }
 
-window.profitGraph = new Chart(ctx,{
+window.graph=new Chart(ctx,{
 type:'bar',
 data:{
 labels:labels,
@@ -244,59 +176,106 @@ data:profits
 
 }
 
+// ================= DELETE =================
+
+function deletePO(index){
+
+poList.splice(index,1)
+
+localStorage.setItem("poList",JSON.stringify(poList))
+
+loadRecords()
+loadDashboard()
+
+}
+
+// ================= EDIT =================
+
+function editPO(index){
+
+let po=poList[index]
+
+document.getElementById("poNumber").value=po.number
+document.getElementById("client").value=po.client
+document.getElementById("department").value=po.department
+document.getElementById("amount").value=po.amount
+document.getElementById("investment").value=po.investment
+document.getElementById("extra").value=po.extra
+
+showPage("addpo")
+
+poList.splice(index,1)
+
+}
+
+// ================= SEARCH =================
+
+function searchPO(){
+
+let input=document.getElementById("searchPO").value.toLowerCase()
+
+let rows=document.querySelectorAll("#tableBody tr")
+
+rows.forEach(row=>{
+
+let text=row.innerText.toLowerCase()
+
+row.style.display=text.includes(input)?"":"none"
+
+})
+
+}
+
+// ================= INVOICE =================
+
+function generateInvoice(index){
+
+let po=poList[index]
+
+let itemsHTML=""
+
+po.items.forEach(item=>{
+itemsHTML+=item+"<br>"
+})
+
+let html=`
+
+<h2>Alfathe Traders</h2>
+
+<b>PO Number:</b> ${po.number}<br>
+<b>Client:</b> ${po.client}<br>
+<b>Department:</b> ${po.department}<br>
+
+<h3>Items</h3>
+
+${itemsHTML}
+
+<hr>
+
+PO Amount: ${po.amount}<br>
+Check Amount: ${po.check}<br>
+Profit: ${po.profit}<br>
+
+`
+
+let win=window.open()
+
+win.document.write(html)
+
+win.print()
+
+}
+
 // ================= OCR READER =================
 
 function readPOImage(){
 
-let file = document.getElementById("poImage").files[0]
+let file=document.getElementById("poImage").files[0]
 
 if(!file){
-alert("Upload PO Image or PDF")
+alert("Upload PO")
 return
 }
-
-if(file.type === "application/pdf"){
-
-let reader = new FileReader()
-
-reader.onload = function(){
-
-let typedarray = new Uint8Array(this.result)
-
-pdfjsLib.getDocument(typedarray).promise.then(function(pdf){
-
-pdf.getPage(1).then(function(page){
-
-let viewport = page.getViewport({scale:2})
-
-let canvas = document.createElement("canvas")
-let context = canvas.getContext("2d")
-
-canvas.height = viewport.height
-canvas.width = viewport.width
-
-page.render({
-canvasContext:context,
-viewport:viewport
-}).promise.then(function(){
-
-Tesseract.recognize(canvas,'eng').then(({data:{text}})=>{
-
-aiSmartPOReader(text)
-
-})
-
-})
-
-})
-
-})
-
-}
-
-reader.readAsArrayBuffer(file)
-
-}else{
 
 Tesseract.recognize(file,'eng').then(({data:{text}})=>{
 
@@ -306,61 +285,88 @@ aiSmartPOReader(text)
 
 }
 
-}
-
 // ================= AI SMART PO READER =================
 
 function aiSmartPOReader(text){
 
-text = text.replace(/\n/g," ")
+text=text.replace(/\n/g," ")
 
-console.log("OCR TEXT:",text)
+console.log(text)
 
 // ===== PO NUMBER =====
 
-let poMatch = text.match(/PO\s*(No|#)?\s*[:\-]?\s*([0-9]+)/i)
+let poMatch=text.match(/PO\s*(No|#)?\s*[:\-]?\s*([0-9]+)/i)
 
 if(poMatch){
-document.getElementById("poNumber").value = poMatch[2]
+document.getElementById("poNumber").value=poMatch[2]
 }
 
 // ===== AMOUNT =====
 
-let amountMatch = text.match(/Total\s*Inclusive\s*Tax\s*Amount\s*PKR\s*([0-9,.]+)/i)
+let amountMatch=text.match(/Total\s*Inclusive\s*Tax\s*Amount\s*PKR\s*([0-9,.]+)/i)
 
 if(!amountMatch){
-amountMatch = text.match(/Total\s*Exclusive\s*Tax\s*Amount\s*PKR\s*([0-9,.]+)/i)
-}
-
-if(!amountMatch){
-amountMatch = text.match(/Grand\s*Total\s*PKR\s*([0-9,.]+)/i)
-}
-
-if(!amountMatch){
-amountMatch = text.match(/PKR\s*([0-9]{5,}[0-9,.]*)/i)
+amountMatch=text.match(/Grand\s*Total\s*PKR\s*([0-9,.]+)/i)
 }
 
 if(amountMatch){
 
-let amount = amountMatch[1]
-amount = amount.replace(/,/g,"")
+let amount=amountMatch[1].replace(/,/g,"")
 
-document.getElementById("amount").value = amount
+document.getElementById("amount").value=amount
 
 }
 
 // ===== CLIENT =====
 
 if(text.includes("Punjab Police")){
-document.getElementById("client").value = "Punjab Police"
+document.getElementById("client").value="Punjab Police"
 }
 
 // ===== DEPARTMENT =====
 
 if(text.includes("Riot Management")){
-document.getElementById("department").value = "Riot Management Police"
+document.getElementById("department").value="Riot Management Police"
 }
 
-alert("AI PO Data Extracted Successfully")
+// ===== ITEMS TABLE =====
+
+poItems=[]
+
+let lines=text.split("PKR")
+
+lines.forEach(line=>{
+
+if(line.includes("EACH")||line.includes("qty")){
+
+poItems.push(line.trim())
 
 }
+
+})
+
+let itemsDiv=document.getElementById("poItems")
+
+if(itemsDiv){
+
+itemsDiv.innerHTML=""
+
+poItems.forEach(item=>{
+itemsDiv.innerHTML+=item+"<br>"
+})
+
+}
+
+alert("AI PO Data + Items Extracted")
+
+}
+
+// ================= START =================
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+showPage("dashboard")
+loadDashboard()
+loadRecords()
+
+})
