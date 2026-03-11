@@ -227,17 +227,17 @@ row.style.display="none"
 }
 function loadProfitGraph(){
 
-let poList = JSON.parse(localStorage.getItem("poList")) || []
+let polist = JSON.parse(localStorage.getItem("poList")) || []
 
 let labels = []
 let profits = []
 
-poList.forEach(function(po){
+polist.forEach(function(po){
 labels.push("PO " + po.number)
 profits.push(po.profit)
 })
 
-let ctx = document.getElementById("profitChart")
+let ctx = document.getElementById("profitChart").getContext("2d")
 
 if(window.profitChart){
 window.profitChart.destroy()
