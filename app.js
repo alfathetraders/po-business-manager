@@ -77,18 +77,16 @@ roi = (profit / investment) * 100
 
 
 let po = {
-
-number: number,
-client: client,
-department: department,
-amount: amount,
-check: check,
-investment: investment,
-extra: extra,
-profit: profit,
-roi: roi,
-
-}
+  number: number,
+  client: client,
+  department: department,
+  amount: amount,
+  check: check,
+  investment: investment,
+  extra: extra,
+  profit: profit,
+  roi: roi
+};
 
 poList.push(po)
 
