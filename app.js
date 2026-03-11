@@ -113,6 +113,7 @@ table.innerHTML += `
 <tr>
 <td>${po.number}</td>
 <td>${po.client}</td>
+<td>${po.department}</td>
 <td>${po.amount}</td>
 <td>${po.check.toFixed(2)}</td>
 <td>${po.investment}</td>
@@ -315,7 +316,7 @@ text = text.replace(/\n/g," ")
 
 console.log("OCR TEXT:",text)
 
-// PO NUMBER
+// ===== PO NUMBER =====
 
 let poMatch = text.match(/PO\s*(No|#)?\s*[:\-]?\s*([0-9]+)/i)
 
@@ -323,7 +324,7 @@ if(poMatch){
 document.getElementById("poNumber").value = poMatch[2]
 }
 
-// AMOUNT
+// ===== AMOUNT =====
 
 let amountMatch = text.match(/Total\s*Inclusive\s*Tax\s*Amount\s*PKR\s*([0-9,.]+)/i)
 
@@ -342,20 +343,19 @@ amountMatch = text.match(/PKR\s*([0-9]{5,}[0-9,.]*)/i)
 if(amountMatch){
 
 let amount = amountMatch[1]
-
 amount = amount.replace(/,/g,"")
 
 document.getElementById("amount").value = amount
 
 }
 
-// CLIENT
+// ===== CLIENT =====
 
 if(text.includes("Punjab Police")){
 document.getElementById("client").value = "Punjab Police"
 }
 
-// DEPARTMENT
+// ===== DEPARTMENT =====
 
 if(text.includes("Riot Management")){
 document.getElementById("department").value = "Riot Management Police"
