@@ -11,6 +11,7 @@
 
 <body>
 
+
 <div class="sidebar">
 
 <h2>PO Manager</h2>
@@ -33,17 +34,43 @@
 <h1>PO Business Manager</h1>
 
 
+
 <!-- DASHBOARD -->
 
 <div id="dashboard" class="page">
 
-<h2>Dashboard</h2>
+<div class="cards">
 
-<p>Total PO: <span id="totalPO">0</span></p>
+<div class="card">
 
-<p>Total Profit: <span id="totalProfit">0</span></p>
+<h3>Total PO</h3>
+
+<p id="totalPO">0</p>
 
 </div>
+
+
+<div class="card">
+
+<h3>Total Profit</h3>
+
+<p id="totalProfit">0</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>System</h3>
+
+<p>Active</p>
+
+</div>
+
+</div>
+
+</div>
+
 
 
 
@@ -69,7 +96,6 @@
 <button onclick="calculate()">Calculate</button>
 
 <p id="result"></p>
-
 
 <button onclick="savePO()">Save PO</button>
 
