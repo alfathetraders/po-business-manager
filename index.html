@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>PO Business Manager Enterprise</title>
+<title>PO Business Manager</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -22,20 +20,12 @@
 <ul>
 
 <li onclick="showPage('dashboard')">Dashboard</li>
-
 <li onclick="showPage('addpo')">Add PO</li>
-
 <li onclick="showPage('records')">Records</li>
-
 <li onclick="showPage('reports')">Reports</li>
 
-<li>
-<a href="clients.html">Clients</a>
-</li>
-
-<li>
-<a href="expenses.html">Expenses</a>
-</li>
+<li><a href="clients.html">Clients</a></li>
+<li><a href="expenses.html">Expenses</a></li>
 
 </ul>
 
@@ -43,11 +33,7 @@
 
 <div class="content">
 
-<div class="header">
-
-<h1>PO Business Manager Enterprise</h1>
-
-</div>
+<h1>PO Business Manager</h1>
 
 <!-- Dashboard -->
 
@@ -55,27 +41,11 @@
 
 <h2>Dashboard</h2>
 
-<div class="cards">
+<p>Total POs: <span id="totalPO">0</span></p>
 
-<div class="card blue">
+<p>Total Profit: <span id="totalProfit">0</span></p>
 
-<p>Total POs</p>
-
-<h3 id="totalPO">0</h3>
-
-</div>
-
-<div class="card green">
-
-<p>Total Profit</p>
-
-<h3 id="totalProfit">0</h3>
-
-</div>
-
-</div>
-
-<canvas id="profitChart" height="120"></canvas>
+<canvas id="profitChart"></canvas>
 
 </div>
 
@@ -95,16 +65,15 @@
 
 <input id="investment" placeholder="Investment"><br>
 
-<button onclick="calculate()">Calculate Profit</button>
+<button onclick="calculate()">Calculate</button>
 
 <p id="result"></p>
 
 <h3>Items</h3>
 
-<table border="1" width="100%">
+<table>
 
 <tr>
-
 <th>Item</th>
 <th>Spec</th>
 <th>Unit</th>
@@ -112,25 +81,17 @@
 <th>Qty</th>
 <th>Rate</th>
 <th></th>
-
 </tr>
 
 <tbody id="itemsTable"></tbody>
 
 </table>
 
-<br>
-
 <input id="itemName" placeholder="Item">
-
 <input id="itemSpec" placeholder="Specification">
-
 <input id="itemUnit" placeholder="Unit">
-
 <input id="itemPack" placeholder="Pack">
-
 <input id="itemQty" placeholder="Qty">
-
 <input id="itemRate" placeholder="Rate">
 
 <button onclick="addItem()">Add Item</button>
@@ -147,22 +108,19 @@
 
 <h2>PO Records</h2>
 
-<table border="1" width="100%">
-
-<thead>
+<table>
 
 <tr>
 
 <th>PO</th>
 <th>Client</th>
-<th>Amount</th>
+<th>PO Amount</th>
+<th>Check Amount</th>
 <th>Investment</th>
 <th>Profit</th>
 <th>Actions</th>
 
 </tr>
-
-</thead>
 
 <tbody id="tableBody"></tbody>
 
@@ -176,7 +134,7 @@
 
 <h2>Reports</h2>
 
-<p>Reports will appear here.</p>
+<canvas id="reportChart"></canvas>
 
 </div>
 
@@ -185,4 +143,5 @@
 <script src="app.js"></script>
 
 </body>
+
 </html>
