@@ -10,7 +10,6 @@ loadData()
 
 }
 
-
 function calculate(){
 
 let amount=parseFloat(document.getElementById("amount").value||0)
@@ -34,7 +33,6 @@ let profit=(check-invest)-lawyer
 document.getElementById("result").innerText="Estimated Profit: "+profit.toFixed(2)
 
 }
-
 
 function savePO(){
 
@@ -60,7 +58,6 @@ let check=amount-ag-tax
 
 let profit=(check-invest)-lawyer
 
-
 let po={
 
 number:poNumber.value,
@@ -70,7 +67,6 @@ investment:invest,
 profit:profit
 
 }
-
 
 let data=JSON.parse(localStorage.getItem("poData")||"[]")
 
@@ -83,8 +79,6 @@ alert("PO Saved")
 loadData()
 
 }
-
-
 
 function loadData(){
 
@@ -103,13 +97,16 @@ data.forEach((p,i)=>{
 totalProfit+=p.profit
 
 body.innerHTML+=`
-
 <tr>
 
 <td>${p.number}</td>
+
 <td>${p.client}</td>
+
 <td>${p.amount}</td>
+
 <td>${p.investment}</td>
+
 <td>${p.profit.toFixed(2)}</td>
 
 <td>
@@ -123,14 +120,17 @@ body.innerHTML+=`
 </td>
 
 </tr>
-
 `
 
 })
 
-loadData()
+let profitBox=document.getElementById("totalProfit")
 
+if(profitBox){
+profitBox.innerText=totalProfit.toFixed(2)
+}
 
+}
 
 function openST(i){
 
@@ -142,8 +142,6 @@ window.open("stinvoice.html")
 
 }
 
-
-
 function openBill(i){
 
 let pos=JSON.parse(localStorage.getItem("poData")||"[]")
@@ -153,8 +151,6 @@ localStorage.setItem("selectedPO",JSON.stringify(pos[i]))
 window.open("bill.html")
 
 }
-
-
 
 function openDC(i){
 
