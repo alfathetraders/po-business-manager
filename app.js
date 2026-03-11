@@ -98,7 +98,7 @@ body.innerHTML=""
 
 let totalProfit=0
 
-data.forEach(p=>{
+data.forEach((p,i)=>{
 
 totalProfit+=p.profit
 
@@ -112,17 +112,20 @@ body.innerHTML+=`
 <td>${p.investment}</td>
 <td>${p.profit.toFixed(2)}</td>
 
+<td>
+
+<button onclick="openST(${i})">Sales Tax Invoice</button>
+
+<button onclick="openBill(${i})">Bill</button>
+
+<button onclick="openDC(${i})">Delivery Challan</button>
+
+</td>
+
 </tr>
 
 `
 
 })
-
-document.getElementById("totalPO").innerText=data.length
-
-document.getElementById("totalProfit").innerText=totalProfit.toFixed(2)
-
-}
-
 
 loadData()
