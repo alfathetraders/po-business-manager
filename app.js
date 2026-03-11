@@ -36,10 +36,15 @@ let govtGST = gst * 0.20
 let check = po - incomeTax - govtGST
 
 let profit = check - investment - extra
+let roi = 0
+if(investment > 0){
+roi = (profit / investment) * 100
+}
 
 document.getElementById("result").innerHTML =
 "Check Amount: " + check.toFixed(2) + "<br>" +
-"Profit: " + profit.toFixed(2)
+"Profit: " + profit.toFixed(2) + "<br>" +
+"Investment ROI: " + roi.toFixed(2) + "%"
 
 }
 
