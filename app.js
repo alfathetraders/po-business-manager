@@ -130,22 +130,20 @@ table.innerHTML += `
 
 function loadDashboard(){
 
-let totalPO=poList.length
+let polist = JSON.parse(localStorage.getItem("poList")) || []
 
-let totalProfit=0
+let totalPO = polist.length
 
-poList.forEach(function(po){
+let totalProfit = 0
 
-totalProfit+=po.profit
-
+polist.forEach(function(po){
+totalProfit += po.profit
 })
 
-
-document.getElementById("totalPO").innerText=totalPO
-document.getElementById("totalProfit").innerText=totalProfit.toFixed(2)
+document.getElementById("totalPO").innerText = totalPO
+document.getElementById("totalProfit").innerText = totalProfit.toFixed(2)
 
 }
-
 
 
 document.addEventListener("DOMContentLoaded",function(){
