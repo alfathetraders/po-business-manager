@@ -1,6 +1,6 @@
 let poList = JSON.parse(localStorage.getItem("poList") || "[]")
 
-let items=[]
+let items = []
 
 
 function showPage(page){
@@ -10,6 +10,10 @@ p.classList.add("hidden")
 })
 
 document.getElementById(page).classList.remove("hidden")
+
+if(page==="records"){
+loadRecords()
+}
 
 }
 
@@ -21,11 +25,9 @@ let poAmount=parseFloat(document.getElementById("amount").value)||0
 let investment=parseFloat(document.getElementById("investment").value)||0
 let extra=parseFloat(document.getElementById("extra").value)||0
 
-// GST included in PO amount
 let base=poAmount/1.18
 let gst=poAmount-base
 
-// deductions
 let incomeTax=poAmount*0.055
 let govtGST=gst*0.20
 
@@ -43,14 +45,14 @@ document.getElementById("result").innerHTML=
 
 function addItem(){
 
-let name=document.getElementById("itemName").value
-let spec=document.getElementById("itemSpec").value
-let unit=document.getElementById("itemUnit").value
-let pack=document.getElementById("itemPack").value
-let qty=document.getElementById("itemQty").value
-let rate=document.getElementById("itemRate").value
-
-let item={name,spec,unit,pack,qty,rate}
+let item={
+name:document.getElementById("itemName").value,
+spec:document.getElementById("itemSpec").value,
+unit:document.getElementById("itemUnit").value,
+pack:document.getElementById("itemPack").value,
+qty:document.getElementById("itemQty").value,
+rate:document.getElementById("itemRate").value
+}
 
 items.push(item)
 
@@ -69,7 +71,6 @@ table.innerHTML=""
 items.forEach((it,i)=>{
 
 table.innerHTML+=`
-
 <tr>
 
 <td>${it.name}</td>
@@ -84,7 +85,6 @@ table.innerHTML+=`
 </td>
 
 </tr>
-
 `
 
 })
@@ -149,7 +149,6 @@ poList.push(po)
 localStorage.setItem("poList",JSON.stringify(poList))
 
 items=[]
-
 renderItems()
 
 alert("PO Saved Successfully")
@@ -209,7 +208,6 @@ table.innerHTML+=`
 })
 
 document.getElementById("totalPO").innerText=poList.length
-
 document.getElementById("totalProfit").innerText=totalProfit.toFixed(2)
 
 }
