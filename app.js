@@ -239,11 +239,11 @@ profits.push(po.profit)
 
 let ctx = document.getElementById("profitChart").getContext("2d")
 
-if(window.profitChart){
-window.profitChart.destroy()
+if(window.profitGraph){
+window.profitGraph.destroy()
 }
 
-window.profitChart = new Chart(ctx,{
+window.profitGraph = new Chart(ctx,{
 type:'bar',
 data:{
 labels:labels,
