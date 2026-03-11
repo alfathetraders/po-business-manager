@@ -115,6 +115,11 @@ table.innerHTML = ""
 
 poList.forEach(function(po,index){
 
+let roi = 0
+if(po.investment > 0){
+roi = (po.profit / po.investment) * 100
+}
+
 table.innerHTML += `
 <tr>
 <td>${po.number}</td>
@@ -124,15 +129,17 @@ table.innerHTML += `
 <td>${po.investment}</td>
 <td>${po.extra}</td>
 <td>${(po.profit || 0).toFixed(2)}</td>
+
 <td>
-<button onclick="editPO(${index})">✏ Edit</button>
-<button onclick="deletePO(${index})">🗑 Delete</button>
+<button onclick="editPO(${index})">Edit</button>
+<button onclick="deletePO(${index})">Delete</button>
 </td>
+
+<td>${roi.toFixed(2)}%</td>
+
 </tr>
 `
-
 })
-
 }
 
 
