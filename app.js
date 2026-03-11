@@ -1,5 +1,7 @@
 let poList = JSON.parse(localStorage.getItem("poList")) || []
 
+
+
 function showPage(page){
 
 document.querySelectorAll(".page").forEach(function(p){
@@ -153,11 +155,8 @@ totalProfit+=po.profit
 })
 
 
-let poEl=document.getElementById("totalPO")
-let profitEl=document.getElementById("totalProfit")
-
-if(poEl) poEl.innerText=totalPO
-if(profitEl) profitEl.innerText=totalProfit.toFixed(2)
+document.getElementById("totalPO").innerText=totalPO
+document.getElementById("totalProfit").innerText=totalProfit.toFixed(2)
 
 }
 
