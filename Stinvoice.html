@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sales Tax Invoice</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:40px;
+}
+
+.header{
+text-align:center;
+margin-bottom:30px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+table,th,td{
+border:1px solid black;
+padding:10px;
+text-align:left;
+}
+
+.printBtn{
+margin-top:20px;
+padding:10px 20px;
+background:#2d7df6;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h2>SALES TAX INVOICE</h2>
+
+<h3>ALFATEH TRADERS</h3>
+
+</div>
+
+<div>
+
+<b>PO Number:</b> <span id="po"></span><br><br>
+
+<b>Client:</b> <span id="client"></span><br><br>
+
+<b>Date:</b> <span id="date"></span>
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Description</th>
+
+<th>Amount</th>
+
+</tr>
+
+<tr>
+
+<td>Supply as per Purchase Order</td>
+
+<td id="amount"></td>
+
+</tr>
+
+</table>
+
+<button class="printBtn" onclick="window.print()">
+
+Print Invoice
+
+</button>
+
+<script>
+
+let data=JSON.parse(localStorage.getItem("selectedPO"))
+
+document.getElementById("po").innerText=data.number
+document.getElementById("client").innerText=data.client
+document.getElementById("amount").innerText=data.amount
+document.getElementById("date").innerText=new Date().toLocaleDateString()
+
+</script>
+
+</body>
+</html>
