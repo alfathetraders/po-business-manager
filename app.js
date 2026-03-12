@@ -370,3 +370,32 @@ loadDashboard()
 loadRecords()
 
 })
+function openInvoice(index){
+
+let po = poList[index]
+
+localStorage.setItem("currentPO", JSON.stringify(po))
+
+window.open("invoice.html")
+
+}
+
+function openSTInvoice(index){
+
+let po = poList[index]
+
+localStorage.setItem("currentPO", JSON.stringify(po))
+
+window.open("stinvoice.html")
+
+}
+
+function openBill(index){
+
+let po = poList[index]
+
+localStorage.setItem("currentPO", JSON.stringify(po))
+
+window.open("bill.html")
+
+}
